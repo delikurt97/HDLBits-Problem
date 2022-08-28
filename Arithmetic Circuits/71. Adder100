@@ -1,0 +1,10 @@
+module top_module( 
+    input [99:0] a, b,
+    input cin,
+    output cout,
+    output [99:0] sum );
+    wire [98:0] cox;
+    assign {cox[0],sum[0]}= a[0] + b[0] + cin;
+    assign {cout,sum[99:1]} = a[99:1] + b[99:1] + cox[98:0];
+
+endmodule
