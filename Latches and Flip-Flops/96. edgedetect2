@@ -1,0 +1,11 @@
+module top_module (
+    input clk,
+    input [7:0] in,
+    output [7:0] anyedge
+);
+   reg [7:0] ex_in;
+    always @(posedge clk) begin
+        anyedge = (ex_in ^ in);   
+        ex_in = in;       
+    end
+endmodule
