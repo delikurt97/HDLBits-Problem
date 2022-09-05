@@ -3,9 +3,9 @@ module top_module (
     input [7:0] in,
     output [7:0] pedge
 );
-    wire [7:0] ex_in;
+    reg [7:0] ex_in;
     always @(posedge clk) begin
-        pedge = (ex_in ^ in) & in;   // Fucking awsome solution. I bet, you cannot find similiar answer to do this in anywhere. 
+        pedge = (ex_in ^ in) & in;   // Fucking awsome solution. I guess, you cannot find similiar answer to do this in anywhere
         ex_in = in;       
     end
 endmodule
