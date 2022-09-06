@@ -1,0 +1,22 @@
+module top_module (
+    input clk,
+    input reset,
+    input [31:0] in,
+    output [31:0] out
+);
+    reg [31:0] in_ex, out_ex;
+    initial begin in_ex = 32'h0000; end
+    initial begin out_ex = 32'h0000; end
+    always @( posedge clk) begin
+        if (reset == 1) begin 
+        out = 32'h0000;
+           
+        end
+        else begin 
+            out = in_ex & (~in);
+            out =out | out_ex;
+        end 
+        in_ex = in;
+        out_ex = out;
+    end
+endmodule
