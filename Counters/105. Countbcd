@@ -1,0 +1,42 @@
+module top_module (
+    input clk,
+    input reset,   // Synchronous active-high reset
+    output [3:1] ena,
+    output [15:0] q);
+    bcd bcd1(clk, reset, 1'b1, q[3:0]);
+    bcd bcd2(clk, reset, ena[1], q[7:4]);
+    bcd bcd3(clk, reset, ena[2], q[11:8]);
+    bcd bcd4(clk, reset, ena[3], q[15:12]);
+ 
+    assign ena[1] = (q[3:0] > 4'b1000 ? 1:0);
+    assign ena[2] = ((q[7:4] > 4'b1000 && q[3:0] > 4'b1000) ? 1:0);
+    assign ena[3] = ((q[11:8] > 4'b1000 &&q[7:4] > 4'b1000 && q[3:0] > 4'b1000) ? 1:0);
+    
+endmodule
+
+module bcd (
+    input clk,
+    input reset,
+    input en,
+    output [3:0] q);
+    always @(posedge clk) begin
+        if (en) begin //33
+            if (reset ==1) begin//26
+        q<= 4'b0000;
+        end
+        else begin //32
+        q<= q+1;
+            if (q > 4'b1000) begin//31
+            q<= 4'b0000;
+            end
+        end
+        end
+    else begin
+        if (reset ==1) begin
+        q<= 4'b0000;
+        
+        end
+    end
+        
+        end    
+endmodule
