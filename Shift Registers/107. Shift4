@@ -1,0 +1,25 @@
+module top_module(
+    input clk,
+    input areset,  // async active-high reset to zero
+    input load,
+    input ena,
+    input [3:0] data,
+    output reg [3:0] q); 
+    always @(posedge clk or posedge areset) begin//24
+        if ( areset == 1'b1) begin //11
+        q<=0;
+        end
+        else begin 
+            if ( load ==1 ) begin//15
+                q<= data;
+        end
+            else begin if (ena ==1 ) begin// 20-22
+                  q <= q>>1;
+            q[3]<= 1'b0; 
+     
+            end
+                else begin q <= q; end
+        end
+        end
+    end
+endmodule
