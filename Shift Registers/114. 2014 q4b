@@ -1,0 +1,26 @@
+module top_module (
+    input [3:0] SW,
+    input [3:0] KEY,
+    output [3:0] LEDR
+); //
+    
+    MUXDFF mdff4( KEY[0], KEY[3] , SW[3], KEY[1],KEY[2],LEDR[3]);
+    MUXDFF mdff3( KEY[0],  LEDR[3], SW[2], KEY[1],KEY[2],LEDR[2]);
+    MUXDFF mdff2( KEY[0], LEDR[2] , SW[1], KEY[1],KEY[2],LEDR[1]);
+    MUXDFF mdff1( KEY[0],LEDR[1] , SW[0], KEY[1],KEY[2],LEDR[0]);
+    
+
+endmodule
+
+module MUXDFF (
+    input clk,
+    input w, 
+    input R,
+    input E,
+    input L,
+    output Q
+);
+    always @(posedge clk) begin
+        Q <= E ? (L ? R : w) : (L ? R : Q) ;
+    end
+endmodule
