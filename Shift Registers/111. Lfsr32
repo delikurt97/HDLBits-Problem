@@ -1,0 +1,64 @@
+//I cannot find the short way of this practice.  I will think about it.
+module top_module(
+    input clk,
+    input reset,    // Active-high synchronous reset to 32'h1
+    output [31:0] q
+); 
+	
+    d_ff dff32( clk , ( 1'b0 ^ q[0]) ,reset,1'b1, q[31]);
+    d_ff dff31( clk , (  q[31]) ,reset,1'b1, q[30]);
+    d_ff dff30( clk , q[30]  ,reset,1'b1, q[29]);
+    d_ff dff29( clk , q[29] ,reset,1'b1, q[28]);
+
+    d_ff dff28( clk ,  q[28] ,reset,1'b1, q[27]);
+    d_ff dff27( clk ,  q[27] ,reset,1'b1, q[26]);
+    d_ff dff26( clk ,  q[26] ,reset,1'b1, q[25]);
+    d_ff dff25( clk ,  q[25] ,reset,1'b1, q[24]);
+    d_ff dff24( clk ,  q[24] ,reset,1'b1, q[23]);
+    d_ff dff23( clk ,  q[23] ,reset,1'b1, q[22]);
+    d_ff dff22( clk ,  (q[22]^ q[0]) ,reset,1'b1, q[21]);
+    d_ff dff21( clk ,  q[21] ,reset,1'b1, q[20]);
+    d_ff dff20( clk ,  q[20] ,reset,1'b1, q[19]);
+    d_ff dff19( clk ,  q[19] ,reset,1'b1, q[18]);
+    d_ff dff18( clk ,  q[18] ,reset,1'b1, q[17]);
+    d_ff dff17( clk ,  q[17] ,reset,1'b1, q[16]);
+    d_ff dff16( clk ,  q[16] ,reset,1'b1, q[15]);
+    d_ff dff15( clk ,  q[15] ,reset,1'b1, q[14]);
+    d_ff dff14( clk ,  q[14] ,reset,1'b1, q[13]);
+    d_ff dff13( clk ,  q[13] ,reset,1'b1, q[12]);
+    d_ff dff12( clk ,  q[12] ,reset,1'b1, q[11]);
+    d_ff dff11( clk ,  q[11] ,reset,1'b1, q[10]);
+    d_ff dff10( clk ,  q[10] ,reset,1'b1, q[9]);
+    d_ff dff9( clk ,  q[9] ,reset,1'b1, q[8]);
+    d_ff dff8( clk ,  q[8] ,reset,1'b1, q[7]);
+    d_ff dff7( clk ,  q[7] ,reset,1'b1, q[6]);
+    d_ff dff6( clk ,  q[6] ,reset,1'b1, q[5]);
+
+    d_ff dff5( clk ,  q[5] ,reset,1'b1, q[4]);
+    d_ff dff4( clk ,  q[4] ,reset,1'b1, q[3]);
+    d_ff dff3( clk ,  q[3] ,reset,1'b1, q[2]);
+    d_ff dff2( clk ,  (q[2]^ q[0]) ,reset,1'b1, q[1]);
+    d_ff dff1( clk ,  (q[1]^ q[0]) ,reset,1'b0, q[0]);
+    
+endmodule
+
+
+module d_ff (
+    input clk,
+    input  d,
+    input reset,
+    input lb,
+    output  q
+);
+    always @(posedge clk) begin
+        if (reset) begin 
+            if (lb ) begin
+                q<= 0;  end
+            else begin
+                q<= 1;  end
+        end
+        else begin
+            q<= d;    end
+    end 
+endmodule
+
