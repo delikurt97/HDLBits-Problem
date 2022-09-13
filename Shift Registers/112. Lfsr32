@@ -1,4 +1,4 @@
-//I cannot find the short way of this practice.  I will think about it.
+//I cannot find the short way of this practice.  I will think about it.  Maybe genvar features can be use.
 module top_module(
     input clk,
     input reset,    // Active-high synchronous reset to 32'h1
