@@ -1,0 +1,44 @@
+module top_module(
+    input clk,
+    input areset,    // Asynchronous reset to state B
+    input in,
+    output out);//  
+
+    parameter A=0, B=1; 
+    reg state, next_state;
+
+    always @(*) begin    // This is a combinational always block
+        state = next_state;
+        // State transition logic
+    end
+
+    always @(posedge clk, posedge areset) begin    // This is a sequential always block
+        if (areset == 1 ) begin
+        next_state = B;
+        end
+        else begin 
+            if (state ==B ) begin 
+                if (in==1) begin 
+                next_state = B;
+                end 
+                else begin 
+                next_state = A;
+                end
+            end
+            if (state ==A ) begin 
+                if (in==1) begin 
+                next_state = A;
+                end 
+                else begin 
+                next_state = B;
+                end
+            end
+        end
+        // State flip-flops with asynchronous reset
+    end
+    assign out = state;
+
+    // Output logic
+    // assign out = (state == ...);
+
+endmodule
